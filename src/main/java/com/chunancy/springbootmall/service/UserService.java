@@ -5,5 +5,5 @@ import com.chunancy.springbootmall.model.User;
 
 public interface UserService {
     User getUserById(Integer userId);
-    Integer creatUser(UserRegisterRequest userRegisterRequest);
+    Integer register(UserRegisterRequest userRegisterRequest);
 }
