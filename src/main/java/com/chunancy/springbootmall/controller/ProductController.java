@@ -1,5 +1,6 @@
 package com.chunancy.springbootmall.controller;
 
+import com.chunancy.springbootmall.constant.ProductCategory;
 import com.chunancy.springbootmall.dto.ProductRequest;
 import com.chunancy.springbootmall.model.Product;
 import com.chunancy.springbootmall.service.ProductService;
@@ -18,8 +19,11 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts(){
-        List<Product> products = productService.getProducts();
+    public ResponseEntity<List<Product>> getProducts(
+            @RequestParam(required = false)ProductCategory category,
+            @RequestParam(required = false)String search
+            ){
+        List<Product> products = productService.getProducts(category, search);
 
         return ResponseEntity.status(HttpStatus.OK).body(products);
     }
