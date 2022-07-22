@@ -1,8 +1,7 @@
 package com.chunancy.springbootmall.dao.impl;
 
-import com.chunancy.springbootmall.constant.ProductCategory;
 import com.chunancy.springbootmall.dao.ProductDao;
-import com.chunancy.springbootmall.dto.ProductQueryParam;
+import com.chunancy.springbootmall.dto.ProductQueryParams;
 import com.chunancy.springbootmall.dto.ProductRequest;
 import com.chunancy.springbootmall.model.Product;
 import com.chunancy.springbootmall.rowmapper.ProductRowMapper;
@@ -25,22 +24,24 @@ public class ProductDaoImpl implements ProductDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<Product> getProducts(ProductQueryParam productQueryParam) {
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
         String sql = "SELECT product_id, product_name, category, image_url, price, stock, description, " +
                 "created_date, last_modified_date " +
                 "FROM product WHERE 1=1";
 
         Map<String, Object> map = new HashMap<>();
 
-        if (productQueryParam.getCategory() != null){
+        if (productQueryParams.getCategory() != null){
             sql = sql + " AND category = :category";
-            map.put("category", productQueryParam.getCategory().name());
+            map.put("category", productQueryParams.getCategory().name());
         }
 
-        if (productQueryParam.getSearch() != null){
+        if (productQueryParams.getSearch() != null){
             sql = sql + " AND product_name LIKE :search";
-            map.put("search", "%" + productQueryParam.getSearch() + "%");
+            map.put("search", "%" + productQueryParams.getSearch() + "%");
         }
+
+        sql = sql + " ORDER BY " + productQueryParams.getOrderBy() + " " + productQueryParams.getSort();
 
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
 

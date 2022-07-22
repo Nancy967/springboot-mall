@@ -1,8 +1,7 @@
 package com.chunancy.springbootmall.service.impl;
 
-import com.chunancy.springbootmall.constant.ProductCategory;
 import com.chunancy.springbootmall.dao.ProductDao;
-import com.chunancy.springbootmall.dto.ProductQueryParam;
+import com.chunancy.springbootmall.dto.ProductQueryParams;
 import com.chunancy.springbootmall.dto.ProductRequest;
 import com.chunancy.springbootmall.model.Product;
 import com.chunancy.springbootmall.service.ProductService;
@@ -18,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts(ProductQueryParam productQueryParam) {
-        return productDao.getProducts(productQueryParam);
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        return productDao.getProducts(productQueryParams);
     }
 
     @Override

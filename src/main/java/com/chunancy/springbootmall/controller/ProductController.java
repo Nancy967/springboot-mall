@@ -1,7 +1,7 @@
 package com.chunancy.springbootmall.controller;
 
 import com.chunancy.springbootmall.constant.ProductCategory;
-import com.chunancy.springbootmall.dto.ProductQueryParam;
+import com.chunancy.springbootmall.dto.ProductQueryParams;
 import com.chunancy.springbootmall.dto.ProductRequest;
 import com.chunancy.springbootmall.model.Product;
 import com.chunancy.springbootmall.service.ProductService;
@@ -21,14 +21,18 @@ public class ProductController {
 
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getProducts(
-            @RequestParam(required = false)ProductCategory category,
-            @RequestParam(required = false)String search
+            @RequestParam(required = false) ProductCategory category,
+            @RequestParam(required = false) String search,
+            @RequestParam(defaultValue = "created_date") String orderBy,
+            @RequestParam(defaultValue = "desc") String sort
             ){
-        ProductQueryParam productQueryParam = new ProductQueryParam();
-        productQueryParam.setCategory(category);
-        productQueryParam.setSearch(search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+        productQueryParams.setOrderBy(orderBy);
+        productQueryParams.setSort(sort);
 
-        List<Product> products = productService.getProducts(productQueryParam);
+        List<Product> products = productService.getProducts(productQueryParams);
 
         return ResponseEntity.status(HttpStatus.OK).body(products);
     }
