@@ -1,13 +1,14 @@
 package com.chunancy.springbootmall.dao;
 
 import com.chunancy.springbootmall.constant.ProductCategory;
+import com.chunancy.springbootmall.dto.ProductQueryParam;
 import com.chunancy.springbootmall.dto.ProductRequest;
 import com.chunancy.springbootmall.model.Product;
 
 import java.util.List;
 
 public interface ProductDao {
-    List<Product> getProducts(ProductCategory category, String search);
+    List<Product> getProducts(ProductQueryParam productQueryParam);
     Product getProductById(Integer productId);
     Integer createproduct(ProductRequest productRequest);
     void updateProduct(Integer productId, ProductRequest productRequest);

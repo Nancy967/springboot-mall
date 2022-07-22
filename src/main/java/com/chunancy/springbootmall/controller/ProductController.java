@@ -1,6 +1,7 @@
 package com.chunancy.springbootmall.controller;
 
 import com.chunancy.springbootmall.constant.ProductCategory;
+import com.chunancy.springbootmall.dto.ProductQueryParam;
 import com.chunancy.springbootmall.dto.ProductRequest;
 import com.chunancy.springbootmall.model.Product;
 import com.chunancy.springbootmall.service.ProductService;
@@ -23,7 +24,11 @@ public class ProductController {
             @RequestParam(required = false)ProductCategory category,
             @RequestParam(required = false)String search
             ){
-        List<Product> products = productService.getProducts(category, search);
+        ProductQueryParam productQueryParam = new ProductQueryParam();
+        productQueryParam.setCategory(category);
+        productQueryParam.setSearch(search);
+
+        List<Product> products = productService.getProducts(productQueryParam);
 
         return ResponseEntity.status(HttpStatus.OK).body(products);
     }
