@@ -1,6 +1,7 @@
 package com.chunancy.springbootmall.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
     private Integer orderId;
@@ -8,6 +9,7 @@ public class Order {
     private Integer totalAmount;
     private Date createdDate;
     private Date lastMdifiedDate;
+    private List<OrderItem> orderItemList;
 
     public Integer getOrderId() {
         return orderId;
@@ -47,5 +49,13 @@ public class Order {
 
     public void setLastMdifiedDate(Date lastMdifiedDate) {
         this.lastMdifiedDate = lastMdifiedDate;
+    }
+
+    public List<OrderItem> getOrderItemList() {
+        return orderItemList;
+    }
+
+    public void setOrderItemList(List<OrderItem> orderItemList) {
+        this.orderItemList = orderItemList;
     }
 }
