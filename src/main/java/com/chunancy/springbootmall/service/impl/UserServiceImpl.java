@@ -1,6 +1,7 @@
 package com.chunancy.springbootmall.service.impl;
 
 import com.chunancy.springbootmall.dao.UserDao;
+import com.chunancy.springbootmall.dto.UserLoginRequest;
 import com.chunancy.springbootmall.dto.UserRegisterRequest;
 import com.chunancy.springbootmall.model.User;
 import com.chunancy.springbootmall.service.UserService;
@@ -32,5 +33,22 @@ public class UserServiceImpl implements UserService {
         }
 
         return userDao.createUser(userRegisterRequest);
+    }
+
+    @Override
+    public User login(UserLoginRequest userLoginRequest) {
+        User user = userDao.getUserByEmail(userLoginRequest.getEmail());
+
+        if (user == null){
+            log.warn("該email {} 不存在", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        if (user.getPassword().equals(userLoginRequest.getPassword())){
+            return user;
+        }else {
+            log.warn("email {} 密碼不正確", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 }
