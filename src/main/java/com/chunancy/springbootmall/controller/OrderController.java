@@ -1,11 +1,8 @@
 package com.chunancy.springbootmall.controller;
 
-import com.chunancy.springbootmall.constant.ProductCategory;
 import com.chunancy.springbootmall.dto.CreateOrderRequest;
 import com.chunancy.springbootmall.dto.OrderQueryParams;
-import com.chunancy.springbootmall.dto.ProductQueryParams;
 import com.chunancy.springbootmall.model.Order;
-import com.chunancy.springbootmall.model.Product;
 import com.chunancy.springbootmall.service.OrderService;
 import com.chunancy.springbootmall.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;

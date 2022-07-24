@@ -16,7 +16,7 @@ public class OrderRowMapper implements RowMapper<Order> {
         order.setUserId(resultSet.getInt("user_id"));
         order.setTotalAmount(resultSet.getInt("total_amount"));
         order.setCreatedDate(resultSet.getTimestamp("created_date"));
-        order.setLastMdifiedDate(resultSet.getTimestamp("last_modified_date"));
+        order.setLastModifiedDate(resultSet.getTimestamp("last_modified_date"));
 
         return order;
     }
